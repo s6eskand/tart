@@ -400,6 +400,10 @@ class VM: NSObject, VZVirtualMachineDelegate, ObservableObject {
       configuration.consoleDevices.append(consoleDevice)
     }
 
+    // USB Controller
+    let usbControllerConfiguration = VZXHCIControllerConfiguration(serialPorts: [serialPorts])
+    configuration.usbControllers = [usbControllerConfiguration]
+
     try configuration.validate()
 
     return configuration
