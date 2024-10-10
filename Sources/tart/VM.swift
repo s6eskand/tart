@@ -401,8 +401,10 @@ class VM: NSObject, VZVirtualMachineDelegate, ObservableObject {
     }
 
     // USB Controller
-    let usbControllerConfiguration = VZXHCIControllerConfiguration(serialPorts: [serialPorts])
-    configuration.usbControllers = [usbControllerConfiguration]
+    if #available(macOS 15, *) {
+      let usbControllerConfiguration = VZXHCIControllerConfiguration()
+      configuration.usbControllers = [usbControllerConfiguration]
+    }
 
     try configuration.validate()
 
